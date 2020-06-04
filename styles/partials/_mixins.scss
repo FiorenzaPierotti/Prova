@@ -1,0 +1,190 @@
+@mixin menu {
+    .desktop_menu {
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 8;
+        width: 100%;
+        background-color: $bg-nav;
+        @include mQ($medium-bp){
+            display: none;
+        }
+    
+        ul {
+            padding-inline-start: 95px;
+            margin: 0;
+            @include clearfix;
+        }
+        li{
+            float: left;
+            width: 160px;
+            border-left: 1px solid $color-nav;
+            &:last-child{
+                border-right: 1px solid $color-nav;
+            }
+        }
+        a{
+            color: $color-nav;
+            text-decoration: none;
+            text-transform: uppercase;
+            padding: 15px;
+            display: block;
+            text-align: center;
+            transition: 1s;
+            &:hover, &.active{
+                background-color: lighten($bg-nav, 10%);
+            }
+        }
+    }     
+
+    .burger_menu {
+        background-color: $bg-nav;
+        height: 65px;
+        position: fixed; 
+        top: 0;
+        right: 0;
+        width: 100%;
+        z-index: 8;
+        @include mQ ($minW:$medium-bp){
+            display: none;
+        }
+        .burger{
+            height:65px;
+            width: 95px;
+            cursor: pointer;
+            &:hover, &:focus{
+                background-color: lighten($bg-nav, 20%);
+                @for $i from 0 to 3 {
+                    span.line#{$i + 1}{
+                        color: $text-color;
+                    }
+                }
+            }
+        }
+        @for $i from 0 to 3 {
+            span.line#{$i + 1}:after{
+                content: '';
+                background-color:$color-nav;
+                height: 3px;
+                width: 40px;
+                position: absolute;
+                left: 50px;
+                z-index: 4;
+                @include mQ ($medium-bp){
+                    left: 25px;
+                }
+            }
+        }
+        span.line1:after {top:20px;}
+        span.line2:after {top:30px;}
+        span.line3:after {top:40px;}
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color:$color-nav;
+            min-width: 200px;
+            overflow: auto;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 6;
+            &.show {
+                display: block;
+            }
+            a {
+                color: $text-color;
+                padding: 12px 25px;
+                text-decoration: none;
+                display: block;
+                &:hover, &.active{
+                    background-color: lighten($bg-nav, 20%);
+                    color: $color-nav;
+                }
+            }           
+        }
+    }    
+}
+
+@mixin banner {
+    position: relative;
+    color: $text-color;
+    @include mQ($medium-bp){
+        margin-left: -25px;
+    }
+
+    .banner-content {
+        position: absolute;
+        top: 60px;
+        left: 95px;
+        z-index: 4;
+        @include mQ($medium-bp){
+            left: 50px;
+            top: 40px;
+        }
+    }
+    img{
+        width: 100%;
+    }
+    span{
+        font-size: $banner-heading;
+        display: block; 
+        text-transform: capitalize;
+        &.title{
+            font-weight: 700;
+            margin-bottom: 0.7em;
+            @include mQ($small-bp){
+                font-size: 22px;
+            }
+        }
+        &.subtitle{
+            font-size: 24px;
+            @include mQ($small-bp){
+                font-size: 16px;
+            }
+        }
+    }
+}
+@mixin clearfix {    
+    &:after {
+        content: '';
+        display: block;
+        clear: both;
+    }
+}
+//@mixin grid($cols, $mgn){
+    //float: left;
+    //margin-right: $mgn;
+    //margin-bottom: $mgn;
+    //width: ((100% - ($cols - 1) * $mgn) / $cols);
+    //&:nth-child(#{$cols}n){
+        //margin-right: 0;
+    //}
+//}
+@mixin grid($cols, $mgn){
+    float: left;
+    padding: 0 $mgn;
+    margin-bottom: $mgn;
+    width: (100% / $cols);
+}
+@mixin mQ($maxW: null, $minW: null) {
+    
+    @if $maxW != null and $minW != null {    
+       
+       @media screen and (max-width:$maxW) and (min-width:$minW){
+            @content;
+        }  
+    
+    } @else if $minW == null {
+      
+      @media screen and (max-width:$maxW) {
+          @content;
+      }
+    
+    } @else {
+      
+      @media screen and (min-width:$minW) {
+        @content;
+      }
+      
+    }
+}
+

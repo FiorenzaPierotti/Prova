@@ -1,0 +1,271 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0 50px;
+  font-family: "Baloo Tamma 2", cursive;
+  height: 100%;
+}
+@media screen and (max-width: 915px) {
+  body {
+    padding: 0 25px;
+  }
+}
+
+h1 {
+  margin-bottom: 0.3em;
+}
+@media screen and (max-width: 500px) {
+  h1 {
+    font-size: 1.3rem;
+  }
+}
+
+ul {
+  list-style-type: none;
+  padding-inline-start: 0;
+}
+
+header {
+  margin: 58px -50px 0;
+  position: relative;
+}
+@media screen and (max-width: 915px) {
+  header {
+    margin: 65px -25px 0;
+  }
+}
+
+.desktop_menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 8;
+  width: 100%;
+  background-color: #0a1a4e;
+}
+@media screen and (max-width: 915px) {
+  .desktop_menu {
+    display: none;
+  }
+}
+.desktop_menu ul {
+  padding-inline-start: 95px;
+  margin: 0;
+}
+.desktop_menu ul:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.desktop_menu li {
+  float: left;
+  width: 160px;
+  border-left: 1px solid #ffe8e8;
+}
+.desktop_menu li:last-child {
+  border-right: 1px solid #ffe8e8;
+}
+.desktop_menu a {
+  color: #ffe8e8;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 15px;
+  display: block;
+  text-align: center;
+  transition: 1s;
+}
+.desktop_menu a:hover, .desktop_menu a.active {
+  background-color: #10297b;
+}
+
+.burger_menu {
+  background-color: #0a1a4e;
+  height: 65px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  z-index: 8;
+}
+@media screen and (min-width: 915px) {
+  .burger_menu {
+    display: none;
+  }
+}
+.burger_menu .burger {
+  height: 65px;
+  width: 95px;
+  cursor: pointer;
+}
+.burger_menu .burger:hover, .burger_menu .burger:focus {
+  background-color: #1638a8;
+}
+.burger_menu .burger:hover span.line1, .burger_menu .burger:focus span.line1 {
+  color: #111111;
+}
+.burger_menu .burger:hover span.line2, .burger_menu .burger:focus span.line2 {
+  color: #111111;
+}
+.burger_menu .burger:hover span.line3, .burger_menu .burger:focus span.line3 {
+  color: #111111;
+}
+.burger_menu span.line1:after {
+  content: "";
+  background-color: #ffe8e8;
+  height: 3px;
+  width: 40px;
+  position: absolute;
+  left: 50px;
+  z-index: 4;
+}
+@media screen and (max-width: 915px) {
+  .burger_menu span.line1:after {
+    left: 25px;
+  }
+}
+.burger_menu span.line2:after {
+  content: "";
+  background-color: #ffe8e8;
+  height: 3px;
+  width: 40px;
+  position: absolute;
+  left: 50px;
+  z-index: 4;
+}
+@media screen and (max-width: 915px) {
+  .burger_menu span.line2:after {
+    left: 25px;
+  }
+}
+.burger_menu span.line3:after {
+  content: "";
+  background-color: #ffe8e8;
+  height: 3px;
+  width: 40px;
+  position: absolute;
+  left: 50px;
+  z-index: 4;
+}
+@media screen and (max-width: 915px) {
+  .burger_menu span.line3:after {
+    left: 25px;
+  }
+}
+.burger_menu span.line1:after {
+  top: 20px;
+}
+.burger_menu span.line2:after {
+  top: 30px;
+}
+.burger_menu span.line3:after {
+  top: 40px;
+}
+.burger_menu .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #ffe8e8;
+  min-width: 200px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 6;
+}
+.burger_menu .dropdown-content.show {
+  display: block;
+}
+.burger_menu .dropdown-content a {
+  color: #111111;
+  padding: 12px 25px;
+  text-decoration: none;
+  display: block;
+}
+.burger_menu .dropdown-content a:hover, .burger_menu .dropdown-content a.active {
+  background-color: #1638a8;
+  color: #ffe8e8;
+}
+
+.banner {
+  position: relative;
+  color: #111111;
+}
+@media screen and (max-width: 915px) {
+  .banner {
+    margin-left: -25px;
+  }
+}
+.banner .banner-content {
+  position: absolute;
+  top: 60px;
+  left: 95px;
+  z-index: 4;
+}
+@media screen and (max-width: 915px) {
+  .banner .banner-content {
+    left: 50px;
+    top: 40px;
+  }
+}
+.banner img {
+  width: 100%;
+}
+.banner span {
+  font-size: 46px;
+  display: block;
+  text-transform: capitalize;
+}
+.banner span.title {
+  font-weight: 700;
+  margin-bottom: 0.7em;
+}
+@media screen and (max-width: 500px) {
+  .banner span.title {
+    font-size: 22px;
+  }
+}
+.banner span.subtitle {
+  font-size: 24px;
+}
+@media screen and (max-width: 500px) {
+  .banner span.subtitle {
+    font-size: 16px;
+  }
+}
+
+.section {
+  padding-top: 70px;
+}
+
+.port li {
+  float: left;
+  padding: 0 5px;
+  margin-bottom: 5px;
+  width: 50%;
+}
+@media screen and (min-width: 500px) {
+  .port li {
+    float: left;
+    padding: 0 8px;
+    margin-bottom: 8px;
+    width: 33.3333333333%;
+  }
+}
+@media screen and (min-width: 915px) {
+  .port li {
+    float: left;
+    padding: 0 10px;
+    margin-bottom: 10px;
+    width: 25%;
+  }
+}
+.port img {
+  width: 100%;
+  height: 100%;
+}
+
+/*# sourceMappingURL=style.css.map */
