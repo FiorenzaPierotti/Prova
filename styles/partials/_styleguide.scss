@@ -24,9 +24,9 @@ ul{
     padding-inline-start: 0;
 }
 header{
-    margin: 58px -50px 0;    
+    margin: 0 -50px;    
     position: relative;
     @include mQ($maxW:$medium-bp){
-        margin: 65px -25px 0;
+        margin: 0 -25px;
     }
 }

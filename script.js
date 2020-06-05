@@ -24,6 +24,7 @@ window.onclick = function(event) {
     }
   }
 
+// Toggle buttons of the menu nav on click
 let menuList = [
   {id: 1, css: 'home', link: '#home', label: 'Home', active: true},
   {id: 2, css: 'port', link: '#port', label: 'Port', active: false},
@@ -44,8 +45,7 @@ function createMenuListItem(item){
     a.classList.add('active')
   }
   li.appendChild(a);
-  document.querySelector('#menu').appendChild(li);
- 
+  document.querySelector('#menu').appendChild(li); 
 }
 
 function createBurgerMenuItem(item){  
@@ -62,7 +62,6 @@ function createBurgerMenuItem(item){
   }
   document.querySelector('#myDropdown').appendChild(a); 
 }
-
 
 function menuClick(itemId){
   menuList = menuList.map((item) => {
@@ -88,3 +87,15 @@ function createMenuList(){
 }
 
 createMenuList();
+
+// Create Lis in 'port' for the grid
+function createLis(){
+  for(i=0; i<12; i++){
+    const li = document.createElement('li');
+    document.querySelector('.portfolio').appendChild(li);
+    const img = document.createElement('img');
+    img.src ='https://via.placeholder.com/150';
+    li.appendChild(img);
+  }
+}
+createLis();
