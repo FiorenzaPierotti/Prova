@@ -4,7 +4,7 @@ function myFunction (){
 
 // Close the dropdown if the user clicks outside of it
 window.onclick = function(event) {
-    if (!event.target.matches('.burger')) {
+    if (!event.target.matches('.burger') && !event.target.matches('.line')) {
       var dropdowns = document.getElementsByClassName("dropdown-content");
       /*var dropdown = document.querySelector(".dropdown-content");
       if (dropdown.classList.contains('show')) {
@@ -87,6 +87,50 @@ function createMenuList(){
 }
 
 createMenuList();
+
+//-------------------------------------------------------------
+
+function MenuItem(item) {
+	this.id = item.id || 0;
+  this.link = item.link || '';
+  this.css = item.css || '';
+	this.label = item.label || '';
+  this.active = item.active || false;
+ 
+ 	this.toggleActive = function () {
+  	this.active = !this.active
+  }
+  
+  this.setActive = function (bool) {
+  	this.active = bool
+  }
+  
+  
+  setHref = () => {
+  	return '#' + this.link
+  }
+  
+  this.createAnchor = function () {
+  	let a = document.createElement('a');
+    a.classList.add(this.css);
+    a.href = setHref();
+    a.innerHTML = this.label;
+    if(this.active){
+    	a.classList.add('active');
+    }
+    
+    return a;
+  }
+}
+const itemCorrente = {id: 1, css: 'home', link:'home', label:'Home', active: true};
+
+let newMenuItem = new MenuItem(itemCorrente);
+newMenuItem.setActive(false);
+
+console.log(newMenuItem)
+console.log(newMenuItem.createAnchor())
+
+//-------------------------------------------------------------
 
 // Create Lis in 'port' for the grid
 function createLis(){
