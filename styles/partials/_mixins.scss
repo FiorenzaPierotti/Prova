@@ -8,8 +8,7 @@
         background-color: $bg-nav;
         @include mQ($medium-bp){
             display: none;
-        }
-    
+        }    
         ul {
             padding-inline-start: 95px;
             margin: 0;
@@ -105,20 +104,22 @@
 }
 
 @mixin banner {
+    padding-top: 58px;
     position: relative;
     color: $text-color;
     @include mQ($medium-bp){
         margin-left: -25px;
+        padding-top: 65px;
     }
 
     .banner-content {
         position: absolute;
-        top: 60px;
+        top: 155px;
         left: 95px;
         z-index: 4;
         @include mQ($medium-bp){
             left: 50px;
-            top: 40px;
+            top: 90px;
         }
     }
     img{
@@ -183,8 +184,7 @@
       
       @media screen and (min-width:$minW) {
         @content;
-      }
-      
+      }      
     }
 }
 
