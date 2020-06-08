@@ -37,11 +37,6 @@ function MenuItem(item) {
   this.toggleActive = function () {
   	this.active = !this.active
   }
-
-  this.menuClick = function (ItemId){
-    this.active = itemId === this.id;
-    return item;
-  }
   
   this.setActive = function (bool) {
   	this.active = bool
@@ -56,52 +51,52 @@ function MenuItem(item) {
     a.classList.add(this.css);
     a.href = setHref();
     a.innerHTML = this.label;
-    a.onclick();
+    a.addEventListener('click', () => {
+      menuClick(this.id);
+    })
     if(this.active){
     	a.classList.add('active');
     }
-    
     return a;
-  }
+  } 
 }
 
-const itemHome = {id: 1, css: 'home', link:'home', label:'Home', active: true};
-const itemPort = {id: 2, css: 'port', link:'port', label:'Port', active: false};
-const itemBlog = {id: 3, css: 'blog', link:'blog', label:'Blog', active: false};
+const itemMenu = [
+  {id: 1, css: 'home', link: 'home', label: 'Home', active: true},
+  {id: 2, css: 'port', link: 'port', label: 'Port', active: false},
+  {id: 3, css: 'blog', link: 'blog', label: 'Blog', active: false},
+]
 
-let newItemHome = new MenuItem(itemHome).createAnchor();
-let newBurgerItemHome = new MenuItem(itemHome).createAnchor();
+function createMenuList(){
+  document.querySelector('#menu').innerHTML = ''; // svotato menu
+  document.querySelector('#myDropdown').innerHTML = ''; // svotato menu
 
-let newItemPort = new MenuItem(itemPort).createAnchor();
-let newBurgerItemPort = new MenuItem(itemPort).createAnchor();
-
-let newItemBlog = new MenuItem(itemBlog).createAnchor();
-let newBurgerItemBlog = new MenuItem(itemBlog).createAnchor();
-
-//-------------------------------------------------------------
-
-function createMenuListItem(){  
-    const li = document.createElement('li');
-    li.appendChild(newItemHome);
-    document.querySelector('#menu').appendChild(li); 
+  itemMenu.forEach((item, i) => { 
     
-    const second_li = document.createElement('li');
-    second_li.appendChild(newItemPort);
-    document.querySelector('#menu').appendChild(second_li); 
+    //createMenuListItem(menuList[i])
+    createMenuListItem(item) // sono equivalenti
+  });
+}
 
-    const third_li = document.createElement('li');
-    third_li.appendChild(newItemBlog);
-    document.querySelector('#menu').appendChild(third_li); 
+createMenuList();
+
+function createMenuListItem(item){ 
+  let newItem = new MenuItem(item);
+
+  const li = document.createElement('li');
+  li.appendChild(newItem.createAnchor());
+  document.querySelector('#menu').appendChild(li);  
+
+  document.querySelector('#myDropdown').appendChild(newItem.createAnchor());
 } 
 
-function createBurgerMenuItem(){
-  document.querySelector('#myDropdown').appendChild(newBurgerItemHome); 
-  document.querySelector('#myDropdown').appendChild(newBurgerItemBlog); 
-  document.querySelector('#myDropdown').appendChild(newBurgerItemPort);
-} 
-
-createMenuListItem()
-createBurgerMenuItem()
+function menuClick(itemId){
+  itemMenu.map((value) => {
+    value.active = itemId === value.id
+    return value;
+  })  
+  createMenuList();
+}
 
 /*let menuList = [
   {id: 1, css: 'home', link: '#home', label: 'Home', active: true},
