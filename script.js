@@ -25,7 +25,81 @@ window.onclick = function(event) {
   }
 
 // Toggle buttons of the menu nav on click
-let menuList = [
+
+//-------------------------------------------------
+function MenuItem(item) {
+	this.id = item.id || 0;
+  this.link = item.link || '';
+  this.css = item.css || '';
+	this.label = item.label || '';
+  this.active = item.active || false;
+
+  this.toggleActive = function () {
+  	this.active = !this.active
+  }
+  
+  this.setActive = function (bool) {
+  	this.active = bool
+  }  
+  
+  setHref = () => {
+  	return '#' + this.link
+  }
+  
+  this.createAnchor = function () {
+  	let a = document.createElement('a');
+    a.classList.add(this.css);
+    a.href = setHref();
+    a.innerHTML = this.label;
+    a.addEventListener('click', () => {
+      menuClick(this.id);
+    })
+    if(this.active){
+    	a.classList.add('active');
+    }
+    return a;
+  } 
+}
+
+const itemMenu = [
+  {id: 1, css: 'home', link: 'home', label: 'Home', active: true},
+  {id: 2, css: 'port', link: 'port', label: 'Port', active: false},
+  {id: 3, css: 'blog', link: 'blog', label: 'Blog', active: false},
+]
+
+function createMenuList(){
+  document.querySelector('#menu').innerHTML = ''; // svotato menu
+  document.querySelector('#myDropdown').innerHTML = ''; // svotato menu
+
+  itemMenu.forEach((item, i) => { 
+    
+    //createMenuListItem(menuList[i])
+    createMenuListItem(item) // sono equivalenti
+  });
+}
+
+createMenuList();
+
+function createMenuListItem(item){ 
+  let newItem = new MenuItem(item);
+
+  const li = document.createElement('li');
+  li.appendChild(newItem.createAnchor());
+  document.querySelector('#menu').appendChild(li);  
+
+  document.querySelector('#myDropdown').appendChild(newItem.createAnchor());
+} 
+
+function menuClick(itemId){
+  itemMenu.map((value) => {
+    value.active = itemId === value.id
+    return value;
+  })  
+  createMenuList();
+}
+
+
+/*let menuList = [
   {id: 1, css: 'home', link: '#home', label: 'Home', active: true},
   {id: 2, css: 'port', link: '#port', label: 'Port', active: false},
   {id: 3, css: 'blog', link: '#blog', label: 'Blog', active: false},
@@ -65,11 +139,11 @@ function createBurgerMenuItem(item){
 
 function menuClick(itemId){
   menuList = menuList.map((item) => {
-    /*if(itemId === item.id){
-      item.active = true;
-    } else {
-      item.active = false;
-    }*/
+    //if(itemId === item.id){
+      //item.active = true;
+    //} else {
+      //item.active = false;
+    //}
     item.active = itemId === item.id
     return item;
   })
@@ -86,51 +160,7 @@ function createMenuList(){
   });
 }
 
-createMenuList();
-
-//-------------------------------------------------------------
-
-function MenuItem(item) {
-	this.id = item.id || 0;
-  this.link = item.link || '';
-  this.css = item.css || '';
-	this.label = item.label || '';
-  this.active = item.active || false;
- 
- 	this.toggleActive = function () {
-  	this.active = !this.active
-  }
-  
-  this.setActive = function (bool) {
-  	this.active = bool
-  }
-  
-  
-  setHref = () => {
-  	return '#' + this.link
-  }
-  
-  this.createAnchor = function () {
-  	let a = document.createElement('a');
-    a.classList.add(this.css);
-    a.href = setHref();
-    a.innerHTML = this.label;
-    if(this.active){
-    	a.classList.add('active');
-    }
-    
-    return a;
-  }
-}
-const itemCorrente = {id: 1, css: 'home', link:'home', label:'Home', active: true};
-
-let newMenuItem = new MenuItem(itemCorrente);
-newMenuItem.setActive(false);
-
-console.log(newMenuItem)
-console.log(newMenuItem.createAnchor())
-
-//-------------------------------------------------------------
+createMenuList();*/
 
 // Create Lis in 'port' for the grid
 function createLis(){
