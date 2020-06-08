@@ -14,7 +14,8 @@ body{
     }
 }
 h1 {
-    margin-bottom: 1.6em;
+    font-size: 1.6rem;
+    margin-bottom: 1.6rem;
     @include mQ($maxW:$small-bp){
         font-size: 1.3rem;
     }

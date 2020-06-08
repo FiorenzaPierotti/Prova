@@ -104,7 +104,7 @@
 }
 
 @mixin banner {
-    padding-top: 58px;
+    padding-top: 54px;
     position: relative;
     color: $text-color;
     @include mQ($medium-bp){
@@ -133,13 +133,13 @@
             font-weight: 700;
             margin-bottom: 0.7em;
             @include mQ($small-bp){
-                font-size: 22px;
+                font-size: 1.8rem;
             }
         }
         &.subtitle{
             font-size: 24px;
             @include mQ($small-bp){
-                font-size: 16px;
+                font-size: 1.3rem;
             }
         }
     }
