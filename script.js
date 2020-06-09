@@ -225,12 +225,12 @@ function init(obj) {  //obj = array
 
       const cardUserId = document.createElement('span');
       cardUserId.classList.add('card-link');
-      cardUserId.innerHTML = 'User id:  '+userId;
+      cardUserId.innerHTML = 'User id: '+userId;
       a.appendChild(cardUserId);
 
       const cardId = document.createElement('span');
       cardId.classList.add('card-link');
-      cardId.innerHTML = 'Id:  '+id;
+      cardId.innerHTML = 'Id: '+id;
       a.appendChild(cardId);
 
       return divCol; 
@@ -238,4 +238,12 @@ function init(obj) {  //obj = array
   
   obj.map(blog => create(blog))
   .forEach(divCol => document.querySelector('.row').appendChild(divCol));  
+
+  /*obj.map(blog => {
+    create(blog)
+
+    for(i=0; i<10; i++){
+      divCol => document.querySelector('.row').appendChild(divCol);
+    };
+  }); */
 };
