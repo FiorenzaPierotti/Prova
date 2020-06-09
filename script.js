@@ -225,12 +225,12 @@ function init(obj) {  //obj = array
 
       const cardUserId = document.createElement('span');
       cardUserId.classList.add('card-link');
-      cardUserId.innerHTML = 'User id: '+userId;
+      cardUserId.innerHTML = 'User id:      '+userId;
       a.appendChild(cardUserId);
 
       const cardId = document.createElement('span');
       cardId.classList.add('card-link');
-      cardId.innerHTML = 'Id: '+id;
+      cardId.innerHTML = 'Id:      '+id;
       a.appendChild(cardId);
 
       return divCol; 
