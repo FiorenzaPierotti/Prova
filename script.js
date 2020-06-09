@@ -71,8 +71,7 @@ function createMenuList(){
   document.querySelector('#menu').innerHTML = ''; // svotato menu
   document.querySelector('#myDropdown').innerHTML = ''; // svotato menu
 
-  itemMenu.forEach((item, i) => { 
-    
+  itemMenu.forEach((item, i) => {     
     //createMenuListItem(menuList[i])
     createMenuListItem(item) // sono equivalenti
   });
@@ -167,8 +166,76 @@ function createLis(){
     const li = document.createElement('li');
     document.querySelector('.portfolio').appendChild(li);
     const img = document.createElement('img');
-    img.src ='https://via.placeholder.com/150';
+    img.src ='https://picsum.photos/500/400';
     li.appendChild(img);
   }
 }
 createLis();
+
+// Fetch for Blog
+fetch('https://jsonplaceholder.typicode.com/posts').then(result => {
+    console.dir(result)
+    if(result.ok){
+      if( result.headers.get('Content-Type').includes('application/json')){
+        return result.json()
+      } 
+      throw new Error('response type is not json');
+
+    } else {
+        throw new Error('response failed');
+    }
+}).then( json =>{
+    console.log(json);
+    init(json);    
+    
+}).catch(err => {
+    console.log(err);
+});
+
+function init(obj) {  //obj = array
+  const create = (blog) =>{ //blog = objects of the array
+    const userId = blog.userId;
+    const id = blog.id;
+    const title = blog.title;
+    const body = blog.body;
+
+      const divCol = document.createElement('div');
+      divCol.classList.add('col-sm-6', 'mb-4');
+
+      const divCard = document.createElement('div');
+      divCard.classList.add('card');
+      divCol.appendChild(divCard);
+
+      const a = document.createElement('a');
+      a.classList.add('card-body');
+      divCard.appendChild(a);
+      /*a.addEventListener('click', function(){
+        onClick(card);
+      });*/
+
+      const h5 = document.createElement('h5');
+      h5.classList.add('card-title');
+      h5.innerHTML = title;
+      a.appendChild(h5);
+
+      const cardText = document.createElement('p');
+      cardText.classList.add('card-text');
+      cardText.innerHTML = body;
+      a.appendChild(cardText);
+
+      const cardUserId = document.createElement('span');
+      cardUserId.classList.add('card-link');
+      cardUserId.innerHTML = 'User id:  '+userId;
+      a.appendChild(cardUserId);
+
+      const cardId = document.createElement('span');
+      cardId.classList.add('card-link');
+      cardId.innerHTML = 'Id:  '+id;
+      a.appendChild(cardId);
+
+      return divCol; 
+  };
+  
+  obj.map(blog => create(blog))
+  .forEach(divCol => document.querySelector('.row').appendChild(divCol));  
+};
