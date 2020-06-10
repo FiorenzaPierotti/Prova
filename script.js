@@ -201,6 +201,7 @@ function init(obj) {  //obj = array
 
       const divCol = document.createElement('div');
       divCol.classList.add('col-sm-6', 'mb-4');
+      document.querySelector('.row').appendChild(divCol)
 
       const divCard = document.createElement('div');
       divCard.classList.add('card');
@@ -235,15 +236,34 @@ function init(obj) {  //obj = array
 
       return divCol; 
   };
-  
-  obj.map(blog => create(blog))
-  .forEach(divCol => document.querySelector('.row').appendChild(divCol));  
 
-  /*obj.map(blog => {
-    create(blog)
+  //obj.map(f => create(f))
+  //.forEach(divCol => document.querySelector('.row').appendChild(divCol)); 
 
-    for(i=0; i<10; i++){
-      divCol => document.querySelector('.row').appendChild(divCol);
-    };
-  }); */
+  let firstTen = obj.map((post, postIndex) => {
+    if(postIndex < 10) {
+      return post
+    }    
+  })
+
+  /*obj.filter(firstTen).forEach(function (item) {
+    create(item);
+  })*/
+  console.log(firstTen);
+
+  firstTen.forEach(function (item) {
+    create(item);
+  })
+
+  let eachTen = obj.map((x) => {
+    if(x.id % 10 == 1) {  
+      return x
+    }
+  })
+
+  console.log(eachTen);
+
+  /*eachTen.forEach(function (item) {
+    create(item);
+  })*/
 };
