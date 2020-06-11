@@ -1,5 +1,8 @@
+const scrollPosition = document.querySelector('html').scrollTop;
+localStorage.setItem('scrollPosition', scrollPosition);
+  
 function myFunction (){
-    document.querySelector('#myDropdown').classList.toggle('show');
+  document.querySelector('#myDropdown').classList.toggle('show');
 }
 
 // Close the dropdown if the user clicks outside of it
@@ -270,8 +273,14 @@ function init(obj) {  //obj = array
 
 function onClick(blog){ 
   const scrollPosition = document.querySelector('html').scrollTop;
-  localStorage.setItem('scrollPosition', scrollPosition); 
+  localStorage.setItem('scrollPosition', scrollPosition);   
 
+  changeAsset();
+
+  doSingleCardFetch(blog.id);
+}
+
+function changeAsset(){
   document.querySelector('header').style.display = 'none';
   function section() {
     var x, i;
@@ -285,13 +294,9 @@ function onClick(blog){
   section();
   document.querySelector('body').style.background = 'grey';
   document.querySelector('.single-card').style.display = 'block';
-
-
-  doSingleCardFetch(blog.id);
 }
 
 function doSingleCardFetch(id) {
-
   if (blogs[id]){
       singleCard(blogs[id]) 
   } 
@@ -331,9 +336,15 @@ function singleCard(blogDetail) {
 };
 
 function goBack(){
-  document.querySelector('html').scrollTop = localStorage.getItem('scrollPosition'); 
+  reload();
+  history.back();    
+  document.querySelector('html').scrollTop = localStorage.getItem('scrollPosition');  
+}
+
+function reload(){
   document.querySelector('body').style.background = 'transparent';  
   document.querySelector('header').style.display = 'block';
+  document.querySelector('.single-card').style.display = 'none'; 
   function back() {
     var y, i;
     y = document.querySelectorAll('section');
@@ -342,6 +353,4 @@ function goBack(){
     }
   }
   back();
-  document.querySelector('.single-card').style.display = 'none';
-  history.back();     
 }

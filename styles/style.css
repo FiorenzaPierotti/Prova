@@ -211,6 +211,10 @@ header {
 @media screen and (max-width: 915px) {
   .banner .banner-content {
     left: 50px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .banner .banner-content {
     top: 90px;
   }
 }
@@ -289,6 +293,17 @@ header {
   display: none;
   height: auto;
   cursor: auto;
+  margin: 25px 20%;
+}
+@media screen and (max-width: 915px) {
+  .single-card {
+    margin: 25px 5%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .single-card {
+    margin: 25px 0;
+  }
 }
 
 .go_back {
