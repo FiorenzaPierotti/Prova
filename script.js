@@ -273,11 +273,18 @@ function onClick(blog){
   localStorage.setItem('scrollPosition', scrollPosition); 
 
   document.querySelector('header').style.display = 'none';
-  var section = document.querySelectorAll('section')[0].style.display = 'none'
-  //document.querySelector('#blog').style.display = 'none';
+  function section() {
+    var x, i;
+    x = document.querySelectorAll('section');
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = 'none';
+    }
+    
+    window.scrollTo(0,0);
+  }
+  section();
   document.querySelector('body').style.background = 'grey';
   document.querySelector('.single-card').style.display = 'block';
-  //window.scrollTo(0,0);
 
 
   doSingleCardFetch(blog.id);
@@ -286,7 +293,7 @@ function onClick(blog){
 function doSingleCardFetch(id) {
 
   if (blogs[id]){
-      singleCard(blogs[id])
+      singleCard(blogs[id]) 
   } 
   else {
       fetch('https://jsonplaceholder.typicode.com/posts/'+id).then(result => {
@@ -304,7 +311,7 @@ function doSingleCardFetch(id) {
       }).then( json =>{
       console.log(json);
       blogs[id] = json
-      singleCard(json);
+      singleCard(json);  
       }).catch(err => {
       console.log(err);
       }) 
@@ -323,22 +330,18 @@ function singleCard(blogDetail) {
   document.querySelector('.single-card-link-two').innerHTML = 'Id:  '+id;    
 };
 
-function goBack(){    
+function goBack(){
+  document.querySelector('html').scrollTop = localStorage.getItem('scrollPosition'); 
+  document.querySelector('body').style.background = 'transparent';  
   document.querySelector('header').style.display = 'block';
-  document.querySelector('section').style.display = 'block';
-  document.querySelector('.single-card').style.display = 'none';   
-  emptySingleCard(); 
-  history.back();    
-  document.querySelector('html').scrollTop = localStorage.getItem('scrollPosition');
-}
-
-function emptySingleCard(){
-  var old_element = document.querySelector('.single-card');
-  old_element.innerHTML = 
-  '<div class="card-body">'
-    '<h5 class="single-card-title card-title"></h5>'
-    '<p class="single-card-text card-text"></p>'
-    '<span class="single-card-link card-link"></span>'
-    '<span class="single-card-link card-link"></span>'
-  '</div>';
+  function back() {
+    var y, i;
+    y = document.querySelectorAll('section');
+    for (i = 0; i < y.length; i++) {
+      y[i].style.display = 'block';
+    }
+  }
+  back();
+  document.querySelector('.single-card').style.display = 'none';
+  history.back();     
 }
