@@ -282,6 +282,12 @@ header {
 
 .card {
   height: 100%;
+  cursor: pointer;
+}
+
+.single-card {
+  display: none;
+  height: auto;
 }
 
 /*# sourceMappingURL=style.css.map */

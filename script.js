@@ -172,6 +172,8 @@ function createLis(){
 }
 createLis();
 
+let blogs = {};
+
 // Fetch for Blog
 fetch('https://jsonplaceholder.typicode.com/posts').then(result => {
     console.dir(result)
@@ -210,9 +212,9 @@ function init(obj) {  //obj = array
       const a = document.createElement('a');
       a.classList.add('card-body');
       divCard.appendChild(a);
-      /*a.addEventListener('click', function(){
-        onClick(card);
-      });*/
+      a.addEventListener('click', function(){
+        onClick(blog);
+      });
 
       const h5 = document.createElement('h5');
       h5.classList.add('card-title');
@@ -239,31 +241,104 @@ function init(obj) {  //obj = array
 
   //obj.map(f => create(f))
   //.forEach(divCol => document.querySelector('.row').appendChild(divCol)); 
+  let firstTen = [];
+  let userList = [];
 
-  let firstTen = obj.map((post, postIndex) => {
+  /*obj.map((post, postIndex) => {
     if(postIndex < 10) {
-      return post
-    }    
+     return post
+    }  
+  })*/
+  let eachCard = [1,2,4,9,'a',null,23e-1]
+  obj.map((post) => {
+    const userId = post.userId
+    console.log(userId);
+    if(userList.indexOf(userId) == -1) {
+      firstTen.push(post);
+      userList.push(userId);
+    }
   })
 
-  /*obj.filter(firstTen).forEach(function (item) {
-    create(item);
-  })*/
-  console.log(firstTen);
+  // lista vuota per gli id degli utenti.. se è già presente l'id non lo metto fra i primi10
+  //se non è già presente lo metto e aggiungo l'id dell'utente nella lista degli utenti
+  //
 
   firstTen.forEach(function (item) {
     create(item);
   })
-
-  let eachTen = obj.map((x) => {
-    if(x.id % 10 == 1) {  
-      return x
-    }
-  })
-
-  console.log(eachTen);
-
-  /*eachTen.forEach(function (item) {
-    create(item);
-  })*/
 };
+
+function onClick(blog){ 
+  const scrollPosition = document.querySelector('html').scrollTop;
+  localStorage.setItem('scrollPosition', scrollPosition); 
+
+  document.querySelector('header').style.display = 'none';
+  var section = document.querySelectorAll('section')[0].style.display = 'none'
+  //document.querySelector('#blog').style.display = 'none';
+  document.querySelector('body').style.background = 'grey';
+  document.querySelector('.single-card').style.display = 'block';
+  //window.scrollTo(0,0);
+
+
+  doSingleCardFetch(blog.id);
+}
+
+function doSingleCardFetch(id) {
+
+  if (blogs[id]){
+      singleCard(blogs[id])
+  } 
+  else {
+      fetch('https://jsonplaceholder.typicode.com/posts/'+id).then(result => {
+      console.dir(result)
+      
+      if(result.ok){
+          if( result.headers.get('Content-Type').includes('application/json')){
+          return result.json()
+          } 
+          throw new Error('response type is not json');
+
+      } else {
+          throw new Error('response failed');
+      }
+      }).then( json =>{
+      console.log(json);
+      blogs[id] = json
+      singleCard(json);
+      }).catch(err => {
+      console.log(err);
+      }) 
+  }           
+};
+
+function singleCard(blogDetail) {
+  const userId = blogDetail.userId;
+  const id = blogDetail.id;
+  const title = blogDetail.title;
+  const body = blogDetail.body; 
+  
+  document.querySelector('.single-card-title').innerHTML = title;
+  document.querySelector('.single-card-text').innerHTML = body; 
+  document.querySelector('.single-card-link-one').innerHTML = 'User id:  '+userId; 
+  document.querySelector('.single-card-link-two').innerHTML = 'Id:  '+id;    
+};
+
+function goBack(){    
+  document.querySelector('header').style.display = 'block';
+  document.querySelector('section').style.display = 'block';
+  document.querySelector('.single-card').style.display = 'none';   
+  emptySingleCard(); 
+  history.back();    
+  document.querySelector('html').scrollTop = localStorage.getItem('scrollPosition');
+}
+
+function emptySingleCard(){
+  var old_element = document.querySelector('.single-card');
+  old_element.innerHTML = 
+  '<div class="card-body">'
+    '<h5 class="single-card-title card-title"></h5>'
+    '<p class="single-card-text card-text"></p>'
+    '<span class="single-card-link card-link"></span>'
+    '<span class="single-card-link card-link"></span>'
+  '</div>';
+}
