@@ -32,11 +32,30 @@
     }
 }
 .single-photo{
-    margin: 30px;
     display: none;
+    margin: 50px auto;
+    width: fit-content;
     img{
-        width: 100%;
-        height: 100%;
+        max-width: 100%;
+    }
+    .x{        
+        position: absolute;
+        cursor: pointer;
+        &:after{
+            content: "⮿";
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            border-radius: 50%;
+            color: #1c1a20;
+            font-size: 2.5rem;
+            z-index: 2;
+            line-height: 3rem;
+            transition: 1s;            
+        } 
+        &:hover:after{
+            color: rgb(75, 75, 163);
+        }   
     }
 }
 #blog{

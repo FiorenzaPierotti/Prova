@@ -166,7 +166,7 @@ function createLis(){
     const li = document.createElement('li');
     document.querySelector('.portfolio').appendChild(li);
     const img = document.createElement('img');
-    img.src ='https://picsum.photos/500/'+'30'+i;
+    img.src ='https://picsum.photos/400/40'+i;
     img.addEventListener('click', function(){
       onClickPhotos(img.src);
     });
@@ -175,7 +175,30 @@ function createLis(){
 }
 createLis();
 
+function x(){ 
+  firstpage(); 
+  history.back();    
+  document.querySelector('html').scrollTop = localStorage.getItem('scrollPosition');  
+}
+
+function firstpage(){
+  document.querySelector('body').style.background = 'transparent';  
+  document.querySelector('header').style.display = 'block';
+  document.querySelector('.single-photo').style.display = 'none'; 
+  function m() {
+    var y, i;
+    y = document.querySelectorAll('section');
+    for (i = 0; i < y.length; i++) {
+      y[i].style.display = 'block';
+    }
+  }
+  m();
+}
+
 function onClickPhotos(img){
+  const scrollPosition = document.querySelector('html').scrollTop;
+  localStorage.setItem('scrollPosition', scrollPosition);  
+
   document.querySelector('.single-photo').style.display = 'block';
   document.querySelector('header').style.display = 'none';
   document.querySelector('.photo').src = img

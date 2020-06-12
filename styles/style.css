@@ -1,3 +1,4 @@
+@charset "UTF-8";
 * {
   box-sizing: border-box;
 }
@@ -285,12 +286,31 @@ header {
 }
 
 .single-photo {
-  margin: 30px;
   display: none;
+  margin: 50px auto;
+  width: fit-content;
 }
 .single-photo img {
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
+}
+.single-photo .x {
+  position: absolute;
+  cursor: pointer;
+}
+.single-photo .x:after {
+  content: "⮿";
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  border-radius: 50%;
+  color: #1c1a20;
+  font-size: 2.5rem;
+  z-index: 2;
+  line-height: 3rem;
+  transition: 1s;
+}
+.single-photo .x:hover:after {
+  color: #4b4ba3;
 }
 
 #blog {
