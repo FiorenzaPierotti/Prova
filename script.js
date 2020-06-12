@@ -1,6 +1,3 @@
-const scrollPosition = document.querySelector('html').scrollTop;
-localStorage.setItem('scrollPosition', scrollPosition);
-  
 function myFunction (){
   document.querySelector('#myDropdown').classList.toggle('show');
 }
@@ -169,11 +166,31 @@ function createLis(){
     const li = document.createElement('li');
     document.querySelector('.portfolio').appendChild(li);
     const img = document.createElement('img');
-    img.src ='https://picsum.photos/500/400';
-    li.appendChild(img);
+    img.src ='https://picsum.photos/500/'+'30'+i;
+    img.addEventListener('click', function(){
+      onClickPhotos(img.src);
+    });
+    li.appendChild(img);    
   }
 }
 createLis();
+
+function onClickPhotos(img){
+  document.querySelector('.single-photo').style.display = 'block';
+  document.querySelector('header').style.display = 'none';
+  document.querySelector('.photo').src = img
+  document.querySelector('body').style.background = 'black';
+
+  function hide() {
+    var x, i;
+    x = document.querySelectorAll('section');
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = 'none';
+    }
+  }
+  hide();
+  window.scrollTo(0,0);
+}
 
 let blogs = {};
 
@@ -252,7 +269,6 @@ function init(obj) {  //obj = array
      return post
     }  
   })*/
-  let eachCard = [1,2,4,9,'a',null,23e-1]
   obj.map((post) => {
     const userId = post.userId
     console.log(userId);

@@ -258,6 +258,8 @@ header {
   padding: 0 5px;
   margin-bottom: 5px;
   width: 50%;
+  height: 10rem;
+  cursor: pointer;
 }
 @media screen and (min-width: 500px) {
   .portfolio li {
@@ -278,6 +280,17 @@ header {
 .portfolio img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  background-position: center;
+}
+
+.single-photo {
+  margin: 30px;
+  display: none;
+}
+.single-photo img {
+  width: 100%;
+  height: 100%;
 }
 
 #blog {
@@ -293,11 +306,11 @@ header {
   display: none;
   height: auto;
   cursor: auto;
-  margin: 25px 20%;
+  margin: 50px 20%;
 }
 @media screen and (max-width: 915px) {
   .single-card {
-    margin: 25px 5%;
+    margin: 50px 5%;
   }
 }
 @media screen and (max-width: 500px) {
