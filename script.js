@@ -178,7 +178,7 @@ createLis();
 function x(){ 
   firstpage(); 
   history.back();    
-  document.querySelector('html').scrollTop = localStorage.getItem('scrollPosition');  
+  //document.querySelector('html').scrollTop = localStorage.getItem('scrollPosition');  
 }
 
 function firstpage(){
@@ -196,8 +196,8 @@ function firstpage(){
 }
 
 function onClickPhotos(img){
-  const scrollPosition = document.querySelector('html').scrollTop;
-  localStorage.setItem('scrollPosition', scrollPosition);  
+  //const scrollPosition = document.querySelector('html').scrollTop;
+  //localStorage.setItem('scrollPosition', scrollPosition);  
 
   document.querySelector('.single-photo').style.display = 'flex';
   document.querySelector('header').style.display = 'none';
@@ -217,7 +217,31 @@ function onClickPhotos(img){
 
 let blogs = {};
 
-// Fetch for Blog
+// GET for Edge and IE
+window.onload = function (){
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('GET', 'https://jsonplaceholder.typicode.com/posts');
+
+    xhr.send();
+
+    xhr.onreadystatechange = function(){
+        if (xhr.readyState === 4 && xhr.status === 200){
+
+            let obj = JSON.parse(xhr.responseText);
+
+            init(obj);
+        }
+    }
+     
+    xhr.error = () => {
+        'use strict';
+        alert('Problem contacting server');
+    } 
+}
+
+/*// Fetch for Blog
 fetch('https://jsonplaceholder.typicode.com/posts').then(result => {
     console.dir(result)
     if(result.ok){
@@ -236,6 +260,7 @@ fetch('https://jsonplaceholder.typicode.com/posts').then(result => {
 }).catch(err => {
     console.log(err);
 });
+*/
 
 function init(obj) {  //obj = array
   const create = (blog) =>{ //blog = objects of the array
@@ -311,8 +336,8 @@ function init(obj) {  //obj = array
 };
 
 function onClick(blog){ 
-  const scrollPosition = document.querySelector('html').scrollTop;
-  localStorage.setItem('scrollPosition', scrollPosition);   
+  //const scrollPosition = document.querySelector('html').scrollTop;
+  //localStorage.setItem('scrollPosition', scrollPosition);   
 
   changeAsset();
 
@@ -340,6 +365,29 @@ function doSingleCardFetch(id) {
       singleCard(blogs[id]) 
   } 
   else {
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('GET', 'https://jsonplaceholder.typicode.com/posts/'+id);
+
+    xhr.send();
+
+    xhr.onreadystatechange = function(){
+        if (xhr.readyState === 4 && xhr.status === 200){
+
+            let obj = JSON.parse(xhr.responseText);
+            console.log(obj);
+
+            blogs[id] = obj
+            singleCard(obj);
+        }
+    }
+      
+    xhr.error = () => {
+        'use strict';
+        alert('Problem contacting server'); 
+    }
+      /*
       fetch('https://jsonplaceholder.typicode.com/posts/'+id).then(result => {
       console.dir(result)
       
@@ -359,6 +407,7 @@ function doSingleCardFetch(id) {
       }).catch(err => {
       console.log(err);
       }) 
+      */
   }           
 };
 
@@ -377,7 +426,7 @@ function singleCard(blogDetail) {
 function goBack(){
   reload();
   history.back();    
-  document.querySelector('html').scrollTop = localStorage.getItem('scrollPosition');  
+  //document.querySelector('html').scrollTop = localStorage.getItem('scrollPosition');  
 }
 
 function reload(){
