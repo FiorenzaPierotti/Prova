@@ -176,9 +176,8 @@ function createLis(){
 createLis();
 
 function x(){ 
-  firstpage(); 
-  history.back();    
-  //document.querySelector('html').scrollTop = localStorage.getItem('scrollPosition');  
+  firstpage();     
+  document.querySelector('html').scrollTop = localStorage.getItem('scrollPosition');  
 }
 
 function firstpage(){
@@ -196,8 +195,8 @@ function firstpage(){
 }
 
 function onClickPhotos(img){
-  //const scrollPosition = document.querySelector('html').scrollTop;
-  //localStorage.setItem('scrollPosition', scrollPosition);  
+  const scrollPosition = document.querySelector('html').scrollTop;
+  localStorage.setItem('scrollPosition', 500);
 
   document.querySelector('.single-photo').style.display = 'flex';
   document.querySelector('header').style.display = 'none';
@@ -336,8 +335,8 @@ function init(obj) {  //obj = array
 };
 
 function onClick(blog){ 
-  //const scrollPosition = document.querySelector('html').scrollTop;
-  //localStorage.setItem('scrollPosition', scrollPosition);   
+  const scrollPosition = document.querySelector('html').scrollTop;
+  localStorage.setItem('scrollPosition', scrollPosition);   
 
   changeAsset();
 
@@ -426,7 +425,7 @@ function singleCard(blogDetail) {
 function goBack(){
   reload();
   history.back();    
-  //document.querySelector('html').scrollTop = localStorage.getItem('scrollPosition');  
+  document.querySelector('html').scrollTop = localStorage.getItem('scrollPosition');  
 }
 
 function reload(){
