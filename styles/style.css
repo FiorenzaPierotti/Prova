@@ -31,7 +31,7 @@ h1 {
 
 ul {
   list-style-type: none;
-  padding-inline-start: 0;
+  padding-left: 0;
 }
 
 header {
@@ -58,7 +58,7 @@ header {
   }
 }
 .desktop_menu ul {
-  padding-inline-start: 95px;
+  padding-left: 95px;
   margin: 0;
 }
 .desktop_menu ul:after {
@@ -289,25 +289,37 @@ header {
   display: none;
   margin: 50px auto;
   width: fit-content;
+  justify-content: center;
+}
+@media screen and (max-width: 500px) {
+  .single-photo {
+    margin-top: 80px;
+  }
 }
 .single-photo img {
   max-width: 100%;
 }
 .single-photo .x {
-  position: absolute;
+  position: relative;
   cursor: pointer;
 }
 .single-photo .x:after {
   content: "⮿";
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 0;
+  right: -45px;
   border-radius: 50%;
-  color: #1c1a20;
+  color: #ffe8e8;
   font-size: 2.5rem;
   z-index: 2;
   line-height: 3rem;
   transition: 1s;
+}
+@media screen and (max-width: 500px) {
+  .single-photo .x:after {
+    right: -4px;
+    top: -45px;
+  }
 }
 .single-photo .x:hover:after {
   color: #4b4ba3;

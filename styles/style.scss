@@ -35,23 +35,31 @@
     display: none;
     margin: 50px auto;
     width: fit-content;
+    justify-content: center;
+    @include mQ ($small-bp){
+        margin-top: 80px;
+    }
     img{
         max-width: 100%;
     }
     .x{        
-        position: absolute;
+        position: relative;
         cursor: pointer;
         &:after{
             content: "⮿";
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 0;
+            right: -45px;
             border-radius: 50%;
-            color: #1c1a20;
+            color: $color-nav;
             font-size: 2.5rem;
             z-index: 2;
             line-height: 3rem;
-            transition: 1s;            
+            transition: 1s;
+            @include mQ ($small-bp){
+                right: -4px;
+                top: -45px;
+            }            
         } 
         &:hover:after{
             color: rgb(75, 75, 163);

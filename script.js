@@ -199,7 +199,7 @@ function onClickPhotos(img){
   const scrollPosition = document.querySelector('html').scrollTop;
   localStorage.setItem('scrollPosition', scrollPosition);  
 
-  document.querySelector('.single-photo').style.display = 'block';
+  document.querySelector('.single-photo').style.display = 'flex';
   document.querySelector('header').style.display = 'none';
   document.querySelector('.photo').src = img
   document.querySelector('body').style.background = 'black';
