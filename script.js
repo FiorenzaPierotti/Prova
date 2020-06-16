@@ -64,7 +64,7 @@ window.onclick = function(event) {
 //-------------------------------------------------
 function MenuItem(item) {
 	this.id = item.id || 0;
-  this.link = item.link || '';
+  this.link = '#'+item.link || '';
   this.css = item.css || '';
 	this.label = item.label || '';
   this.active = item.active || false;
@@ -75,19 +75,14 @@ function MenuItem(item) {
   
   this.setActive = function (bool) {
   	this.active = bool
-  }  
-  
-  setHref = () => {
-  	return '#' + this.link
-  }
+  } 
   
   this.createAnchor = function () {
-  	let a = document.createElement('a');
+  	let a = document.createElement('span');
     a.classList.add(this.css);
-    a.href = setHref();
     a.innerHTML = this.label;
     a.addEventListener('click', () => {
-      menuClick(this.id);
+      menuClick(this.id, this.link);
     })
     if(this.active){
     	a.classList.add('active');
@@ -124,12 +119,13 @@ function createMenuListItem(item){
   document.querySelector('#myDropdown').appendChild(newItem.createAnchor());
 } 
 
-function menuClick(itemId){
+function menuClick(itemId, itemLink){
   itemMenu.map((value) => {
     value.active = itemId === value.id
     return value;
   })  
   createMenuList();
+  window.scrollTo(0, window.scrollY + document.querySelector(itemLink).getBoundingClientRect().top)
 }
 
 /*let menuList = [

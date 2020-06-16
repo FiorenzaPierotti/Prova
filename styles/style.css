@@ -74,8 +74,9 @@ header {
 .desktop_menu li:last-child {
   border-right: 1px solid #ffe8e8;
 }
-.desktop_menu a {
+.desktop_menu span {
   color: #ffe8e8;
+  cursor: pointer;
   text-decoration: none;
   text-transform: uppercase;
   padding: 15px;
@@ -83,7 +84,7 @@ header {
   text-align: center;
   transition: 1s;
 }
-.desktop_menu a:hover, .desktop_menu a.active {
+.desktop_menu span:hover, .desktop_menu span.active {
   background-color: #10297b;
 }
 
@@ -181,13 +182,14 @@ header {
 .burger_menu .dropdown-content.show {
   display: block;
 }
-.burger_menu .dropdown-content a {
+.burger_menu .dropdown-content span {
   color: #111111;
+  cursor: pointer;
   padding: 12px 25px;
   text-decoration: none;
   display: block;
 }
-.burger_menu .dropdown-content a:hover, .burger_menu .dropdown-content a.active {
+.burger_menu .dropdown-content span:hover, .burger_menu .dropdown-content span.active {
   background-color: #1638a8;
   color: #ffe8e8;
 }

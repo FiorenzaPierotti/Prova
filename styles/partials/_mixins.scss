@@ -45,8 +45,9 @@
                 border-right: 1px solid $color-nav;
             }
         }
-        a{
+        span{
             color: $color-nav;
+            cursor: pointer;
             text-decoration: none;
             text-transform: uppercase;
             padding: 15px;
@@ -112,8 +113,9 @@
             &.show {
                 display: block;
             }
-            a {
+            span {
                 color: $text-color;
+                cursor: pointer;
                 padding: 12px 25px;
                 text-decoration: none;
                 display: block;
