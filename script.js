@@ -1,3 +1,38 @@
+function loader(){
+  const div = document.createElement('div');
+  div.classList.add('loader');
+  document.querySelector('body').appendChild(div);  
+ 
+  hidePage();
+  window.scrollTo(0,0);    
+}
+loader();
+
+function hidePage(){
+  document.querySelector('header').style.display = 'none';
+    function m() {
+      var y, i;
+      y = document.querySelectorAll('section');
+      for (i = 0; i < y.length; i++) {
+        y[i].style.display = 'none';
+      }
+    }
+    m();
+}
+
+function loaded(){
+  document.querySelector('.loader').style.display = 'none';
+  document.querySelector('header').style.display = 'block';
+    function m() {
+      var y, i;
+      y = document.querySelectorAll('section');
+      for (i = 0; i < y.length; i++) {
+        y[i].style.display = 'block';
+      }
+    }
+    m();
+}
+
 function myFunction (){
   document.querySelector('#myDropdown').classList.toggle('show');
 }
@@ -196,7 +231,7 @@ function firstpage(){
 
 function onClickPhotos(img){
   const scrollPosition = document.querySelector('html').scrollTop;
-  localStorage.setItem('scrollPosition', 500);
+  localStorage.setItem('scrollPosition', scrollPosition);
 
   document.querySelector('.single-photo').style.display = 'flex';
   document.querySelector('header').style.display = 'none';
@@ -228,9 +263,10 @@ window.onload = function (){
     xhr.onreadystatechange = function(){
         if (xhr.readyState === 4 && xhr.status === 200){
 
-            let obj = JSON.parse(xhr.responseText);
+            let obj = JSON.parse(xhr.responseText);            
+            init(obj); 
 
-            init(obj);
+            loaded();
         }
     }
      
@@ -338,7 +374,13 @@ function onClick(blog){
   const scrollPosition = document.querySelector('html').scrollTop;
   localStorage.setItem('scrollPosition', scrollPosition);   
 
-  changeAsset();
+  changeAsset();  
+
+  function loading(){    
+    document.querySelector('.loader').style.display = 'block';
+    document.querySelector('.single-card').style.display = 'none';
+  }
+  loading();
 
   doSingleCardFetch(blog.id);
 }
@@ -419,7 +461,11 @@ function singleCard(blogDetail) {
   document.querySelector('.single-card-title').innerHTML = title;
   document.querySelector('.single-card-text').innerHTML = body; 
   document.querySelector('.single-card-link-one').innerHTML = 'User id:  '+userId; 
-  document.querySelector('.single-card-link-two').innerHTML = 'Id:  '+id;    
+  document.querySelector('.single-card-link-two').innerHTML = 'Id:  '+id; 
+  
+  
+  document.querySelector('.loader').style.display = 'none';
+  document.querySelector('.single-card').style.display = 'flex';
 };
 
 function goBack(){
